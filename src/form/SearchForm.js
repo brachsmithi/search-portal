@@ -2,11 +2,13 @@ import React from 'react';
 import FormContext from './FormContext';
 
 export default class SearchForm extends React.Component {
-  state = { data: {} };
+  state = { data: {}, isSubmitting: false };
 
-  onSubmit = e => {
+  onSubmit = async e => {
     e.preventDefault();
-    this.props.onSubmit(this.state.data);
+    this.setState({ isSubmitting: true });
+    await this.props.onSubmit(this.state.data);
+    this.setState({ isSubmitting: false });
   }
 
   getInputValue = (name, defaultValue = '') => {
@@ -25,7 +27,11 @@ export default class SearchForm extends React.Component {
 
   render() {
     return (
-      <FormContext.Provider value={{ getInputValue: this.getInputValue, inputChange: this.inputChange }}>
+      <FormContext.Provider 
+          value={{ 
+            getInputValue: this.getInputValue, 
+            inputChange: this.inputChange, 
+            isSubmitting: this.state.isSubmitting }}>
         <form method="post" onSubmit={this.onSubmit}>
           {this.props.children}
         </form>
