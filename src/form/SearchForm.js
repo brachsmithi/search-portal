@@ -6,7 +6,7 @@ export default class SearchForm extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit();
+    this.props.onSubmit(this.state.data);
   }
 
   getInputValue = (name, defaultValue = '') => {

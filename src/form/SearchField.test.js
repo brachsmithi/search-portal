@@ -18,14 +18,14 @@ it('renders text input', () => {
 });
 
 it('reads and sets input value when using context to store the data', () => {
-    const wrapper = document.createElement('div');
-    ReactDOM.render(
-      <SearchForm>
-        <SearchField />;
-      </SearchForm>,
-      wrapper
-    );
-    const input = wrapper.querySelector('input');
-    TestUtils.Simulate.change(input, { target: { value: 'vanishing shadow' } });
-    expect(input.value).toEqual('vanishing shadow');
-  });
+  const wrapper = document.createElement('div');
+  ReactDOM.render(
+    <SearchForm>
+    <SearchField />;
+    </SearchForm>,
+    wrapper
+  );
+  const input = wrapper.querySelector('input');
+  TestUtils.Simulate.change(input, { target: { value: 'vanishing shadow' } });
+  expect(input.value).toEqual('vanishing shadow');
+});
