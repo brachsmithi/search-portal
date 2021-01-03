@@ -5,6 +5,8 @@ export default class SearchResult extends React.Component {
     return (
       <div className="result-row">
         <span>{this.props.title}</span>
+        <span>{this.props.year}</span>
+        <span>{this.props.director}</span>
       </div>
     );
   }
