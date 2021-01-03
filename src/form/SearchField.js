@@ -11,7 +11,7 @@ export default class TextInput extends React.Component {
           name="search_term"
           id="search_term"
           onChange={this.context.inputChange(SEARCH_TERM)}
-          value={this.context.getInputValue(SEARCH_TERM)}
+          value={this.context.getInputValue(SEARCH_TERM) || ""}
         />
       </div>
     );
