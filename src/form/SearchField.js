@@ -10,6 +10,7 @@ export default class TextInput extends React.Component {
           type="text"
           name="search_term"
           id="search_term"
+          placeholder="Title Search"
           onChange={this.context.inputChange(SEARCH_TERM)}
           value={this.context.getInputValue(SEARCH_TERM) || ""}
         />
