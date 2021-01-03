@@ -7,14 +7,25 @@ Enzyme.configure({ adapter: new Adapter() });
 
 it('displays initial state', () => {
   const props = {
+    searchTerm: null,
     searchResults: []
   };
   const wrapper = mount(<SearchResultSection {...props} />);
   expect(wrapper.text()).toMatch("Search results will appear here");
 });
 
+it('displays message for empty results', () => {
+  const props = {
+    searchTerm: 'london after midnight',
+    searchResults: []
+  };
+  const wrapper = mount(<SearchResultSection {...props} />);
+  expect(wrapper.text()).toMatch("No results found for london after midnight");
+});
+
 it('displays multiple results', () => {
   const props = {
+    searchTerm: "clue",
     searchResults: [
       {
         title: {

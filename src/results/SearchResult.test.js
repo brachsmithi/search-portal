@@ -15,7 +15,6 @@ it('displays given result', () => {
     director: "Harry O. Hoyt"
   };
   const wrapper = mount(<SearchResult {...params} />);
-  console.log(wrapper.children("div").html())
   const els = wrapper.children("div").children("span");
   expect(els).toHaveLength(3);
   expect(els.at(0).text()).toMatch("The Lost World");
