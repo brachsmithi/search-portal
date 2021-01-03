@@ -7,7 +7,10 @@ Enzyme.configure({ adapter: new Adapter() });
 
 it('displays given result', () => {
   const params = { 
-    title: "The Lost World",
+    title: {
+      name: "The Lost World",
+      id: "53"
+    },
     year: "1925",
     director: "Harry O. Hoyt"
   };
