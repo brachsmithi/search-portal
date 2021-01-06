@@ -5,5 +5,6 @@ test('renders learn react link', () => {
   render(<App />);
   const header = screen.getByText(/Program Search Portal/i);
   expect(header).toBeInTheDocument();
-  expect(screen.getAllByPlaceholderText("Title Search").length).toEqual(1);
+  expect(screen.getByPlaceholderText("Title Search")).toBeInTheDocument();
+  expect(screen.getByText("Search results will appear here")).toBeInTheDocument();
 });

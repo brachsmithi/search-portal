@@ -2,6 +2,7 @@ import './App.css';
 import SearchForm from './form/SearchForm';
 import SearchField from './form/SearchField';
 import SearchButton from './form/SearchButton';
+import SearchResultSection from './results/SearchResultSection';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <SearchField />
         <SearchButton />
       </SearchForm>
+      <SearchResultSection />
     </div>
   );
 }
