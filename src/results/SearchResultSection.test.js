@@ -46,8 +46,6 @@ it('displays multiple results', () => {
     ]
   };
   const wrapper = mount(<SearchResultSection {...props} />);
-  const els = wrapper.children("div").children();
-  expect(els).toHaveLength(2);
-  expect(els.at(0).text()).toMatch("Clue1985Jonathan Lynn");
-  expect(els.at(1).text()).toMatch("Without a Clue1988Thom Eberhardt");
+  const els = wrapper.children();
+  expect(els.text()).toMatch("Clue(1985)Jonathan LynnWithout a Clue(1988)Thom Eberhardt");
 });

@@ -5,7 +5,8 @@ export class SearchResultSection extends React.Component {
   render() {
     let content;
     if (this.props.searchResults?.length > 0) {
-      content = this.props.searchResults.map((result) => <SearchResult key={result.title.id} {...result} />);
+      const results = this.props.searchResults.map((result) => <SearchResult key={result.title.id} {...result} />);
+      content = <div className="result-container">{results}</div>
     } else if (this.props.searchTerm) {
       const message = `No results found for ${this.props.searchTerm}`;
       content = <p>{message}</p>;

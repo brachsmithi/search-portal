@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { SearchResultSection } from '../results/SearchResultSection';
+import '../results/SearchResultSection.css';
 
 export default {
   title: 'SearchResults',

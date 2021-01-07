@@ -15,9 +15,8 @@ it('displays given result', () => {
     director: "Harry O. Hoyt"
   };
   const wrapper = mount(<SearchResult {...params} />);
-  const els = wrapper.children("div").children("span");
-  expect(els).toHaveLength(3);
+  const els = wrapper.children();
   expect(els.at(0).text()).toMatch("The Lost World");
-  expect(els.at(1).text()).toMatch("1925");
+  expect(els.at(1).text()).toMatch("(1925)");
   expect(els.at(2).text()).toMatch("Harry O. Hoyt");
 });
