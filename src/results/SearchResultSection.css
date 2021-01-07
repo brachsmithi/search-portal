@@ -9,6 +9,21 @@
   gap: 1em;
 }
 
+.no-results {
+  margin-top: 1em;
+  text-align: center;
+}
+
+.initial-results {
+  margin-top: 1em;
+  text-align: center;
+  font-style: italic;
+}
+
+.searchTerm {
+  font-weight: bold;
+}
+
 .result-name {
   font-weight: bold;
 }
