@@ -1,0 +1,18 @@
+.search-result-section {
+  font-family:  Arial, Helvetica, sans-serif;
+}
+
+.result-container {
+  margin-top: 1em;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 1em;
+}
+
+.result-name {
+  font-weight: bold;
+}
+
+.result-year {
+  font-style: italic;
+}
