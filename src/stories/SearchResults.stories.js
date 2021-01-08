@@ -52,3 +52,24 @@ MultipleResults.args = {
   ],
   searchTerm: "devil"
 }
+
+export const AlternateTitles = Template.bind({});
+AlternateTitles.args = {
+  searchResults: [
+    {
+      title: {
+        id: "1",
+        name: "The Awful Dr. Orlof",
+        alternateTitles: [
+          "The Demon Doctor",
+          "Cries in the Night",
+          "Screams in the Night",
+          "The Diabolical Dr. Satan"
+        ]
+      },
+      year: "1962",
+      director: "Jesùs Franco"
+    },
+  ],
+  searchTerm: "demon"
+}

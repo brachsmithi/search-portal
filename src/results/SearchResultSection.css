@@ -20,12 +20,22 @@
   font-style: italic;
 }
 
-.searchTerm {
+.search-term {
   font-weight: bold;
 }
 
 .result-name {
   font-weight: bold;
+}
+
+.alternate-title-toggle {
+  font-weight: normal;
+  font-size: small;
+}
+
+.alternate-titles {
+  font-weight: normal;
+  font-size: small;
 }
 
 .result-year {
