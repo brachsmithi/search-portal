@@ -5,7 +5,7 @@
 .result-container {
   margin-top: 1em;
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: 40% auto 40%;
   gap: 1em;
 }
 
@@ -40,4 +40,12 @@
 
 .result-year {
   font-style: italic;
+}
+
+.director-alias-toggle {
+  font-size: small;
+}
+
+.director-aliases {
+  font-size: small;
 }

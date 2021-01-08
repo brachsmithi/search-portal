@@ -31,7 +31,9 @@ MultipleResults.args = {
         name: "Devil"
       },
       year: "2010",
-      director: "John Erick Dowdle"
+      director: {
+        name: "John Erick Dowdle"
+      }
     },
     {
       title: {
@@ -39,7 +41,9 @@ MultipleResults.args = {
         name: "Terror Train" // aka Devil's Railcar
       },
       year: "1980",
-      director: "Roger Spottiswoode"
+      director: {
+        name: "Roger Spottiswoode"
+      }
     },
     {
       title: {
@@ -47,7 +51,9 @@ MultipleResults.args = {
         name: "The Devils"
       },
       year: "1971",
-      director: "Ken Russell"
+      director: {
+        name: "Ken Russell"
+      }
     }
   ],
   searchTerm: "devil"
@@ -68,8 +74,33 @@ AlternateTitles.args = {
         ]
       },
       year: "1962",
-      director: "Jesùs Franco"
+      director: {
+        name: "Jesùs Franco"
+      }
     },
   ],
   searchTerm: "demon"
+}
+
+export const DirectorAliases = Template.bind({});
+DirectorAliases.args = {
+  searchResults: [
+    {
+      title: {
+        id: "1",
+        name: "The House of Exorcism"
+      },
+      year: "1975",
+      director: {
+        name: "Mario Bava",
+        aliases: [
+          "Mario Baja",
+          "John M. Old",
+          "John Old",
+          "John Hold",
+          "Mickey Lion"
+        ]
+      }
+    }
+  ]
 }

@@ -1,17 +1,14 @@
 import React from 'react';
-import Enzyme, { mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { render, screen } from "@testing-library/react";
 import SearchResultSection from './SearchResultSection';
-
-Enzyme.configure({ adapter: new Adapter() });
 
 it('displays initial state', () => {
   const props = {
     searchTerm: null,
     searchResults: []
   };
-  const wrapper = mount(<SearchResultSection {...props} />);
-  expect(wrapper.text()).toMatch("Search results will appear here");
+  render(<SearchResultSection {...props} />);
+  expect(screen.getByText("Search results will appear here")).toBeInTheDocument();
 });
 
 it('displays message for empty results', () => {
@@ -19,8 +16,9 @@ it('displays message for empty results', () => {
     searchTerm: 'london after midnight',
     searchResults: []
   };
-  const wrapper = mount(<SearchResultSection {...props} />);
-  expect(wrapper.text()).toMatch("No results found for london after midnight");
+  render(<SearchResultSection {...props} />);
+  expect(screen.getByText("No results found for")).toBeInTheDocument();
+  expect(screen.getByText("london after midnight")).toBeInTheDocument();
 });
 
 it('displays multiple results', () => {
@@ -33,7 +31,9 @@ it('displays multiple results', () => {
           id: "232"
         },
         year: "1985",
-        director: "Jonathan Lynn"
+        director: {
+          name: "Jonathan Lynn"
+        }
       },
       {
         title: {
@@ -41,11 +41,17 @@ it('displays multiple results', () => {
           id: "43"
         },
         year: "1988",
-        director: "Thom Eberhardt"
+        director: {
+          name: "Thom Eberhardt"
+        }
       }
     ]
   };
-  const wrapper = mount(<SearchResultSection {...props} />);
-  const els = wrapper.children();
-  expect(els.text()).toMatch("Clue(1985)Jonathan LynnWithout a Clue(1988)Thom Eberhardt");
+  render(<SearchResultSection {...props} />);
+  expect(screen.getByText("Clue")).toBeInTheDocument();
+  expect(screen.getByText("(1985)")).toBeInTheDocument();
+  expect(screen.getByText("Jonathan Lynn")).toBeInTheDocument();
+  expect(screen.getByText("Without a Clue")).toBeInTheDocument();
+  expect(screen.getByText("(1988)")).toBeInTheDocument();
+  expect(screen.getByText("Thom Eberhardt")).toBeInTheDocument();
 });
