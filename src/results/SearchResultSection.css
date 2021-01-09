@@ -24,28 +24,20 @@
   font-weight: bold;
 }
 
-.result-name {
-  font-weight: bold;
-}
-
-.alternate-title-toggle {
+.expansion-toggle {
   font-weight: normal;
   font-size: small;
 }
 
-.alternate-titles {
+.result-primary {
+  font-weight: bold;
+}
+
+.secondary-results {
   font-weight: normal;
   font-size: small;
 }
 
 .result-year {
   font-style: italic;
-}
-
-.director-alias-toggle {
-  font-size: small;
-}
-
-.director-aliases {
-  font-size: small;
 }

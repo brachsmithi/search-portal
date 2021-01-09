@@ -1,66 +1,47 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 export default class SearchResult extends React.Component {
 
   render() {
     return (
       <>
-        <TitleResult {...this.props.title} />
+        <ExpandableResult 
+          isPrimary={true}
+          mainResult={this.props.title.name}
+          secondaryResults={this.props.title.alternateTitles}
+         />
         <div className="result-year">({this.props.year})</div>
-        <DirectorResult {...this.props.director} />
+        <ExpandableResult
+          mainResult={this.props.director.name}
+          secondaryResults={this.props.director.aliases}
+         />
       </>
     );
   }
 }
 
-export class TitleResult extends React.Component {
-  state = { show: false };
-
+class ExpandableResult extends React.Component {
+  state = { expand: false };
   render() {
-    const onClick = () => this.setState(prev => ({ show: !prev.show}))
+    const className = this.props.isPrimary ? "result-primary" : "result-standard";
+    const onClick = () => this.setState(prev => ({ expand: !prev.expand}));
     return (
-      <div className="result-name">
-        {this.props.name}
-        {this.props.alternateTitles &&
-          <div className="alternate-title-toggle" onClick={onClick}>
-            {this.state.show ? "less" : "more"}
+      <div>
+        <span className={className}>{this.props.mainResult}</span>
+        {this.props.secondaryResults &&
+          <div className="expansion-toggle" onClick={onClick}>
+            {this.state.expand ? "less" : "more"}
           </div>
         }
-        {this.state.show &&
-            <div className="alternate-titles">
-              {this.props.alternateTitles.map((title, i) => [
-                i > 0 && ", ",
-                title 
-              ])}
-            </div>
-        }
-      </div>
-    )
-  }
-}
-
-export class DirectorResult extends React.Component {
-  state = { show: false };
-  
-  render() {
-    const onClick = () => this.setState(prev => ({ show: !prev.show}))
-    return (
-      <div className="result-director">
-        {this.props.name}
-        {this.props.aliases &&
-          <div className="director-alias-toggle" onClick={onClick}>
-            {this.state.show ? "less" : "more"}
+        {this.state.expand &&
+          <div className="secondary-results">
+            {this.props.secondaryResults.map((result, i) => [
+              i > 0 && ", ",
+              result
+            ])}
           </div>
         }
-        {this.state.show &&
-            <div className="director-aliases">
-              {this.props.aliases.map((alias, i) => [
-                i > 0 && ", ",
-                alias 
-              ])}
-            </div>
-        }
       </div>
-    )
+    );
   }
 }
