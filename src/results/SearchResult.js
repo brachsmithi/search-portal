@@ -13,7 +13,7 @@ export default class SearchResult extends React.Component {
         <div className="result-year">({this.props.year})</div>
         <ExpandableResult
           mainResult={this.props.director.name}
-          secondaryResults={this.props.director.aliases}
+          secondaryResults={this.props.additionalDirectors?.map((director) => director.name)}
          />
       </>
     );

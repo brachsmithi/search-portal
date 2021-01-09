@@ -82,25 +82,35 @@ AlternateTitles.args = {
   searchTerm: "demon"
 }
 
-export const DirectorAliases = Template.bind({});
-DirectorAliases.args = {
+export const MultipleDirectors = Template.bind({});
+MultipleDirectors.args = {
   searchResults: [
     {
       title: {
         id: "1",
-        name: "The House of Exorcism"
+        name: "Casino Royale"
       },
-      year: "1975",
+      year: "1967",
       director: {
-        name: "Mario Bava",
-        aliases: [
-          "Mario Baja",
-          "John M. Old",
-          "John Old",
-          "John Hold",
-          "Mickey Lion"
-        ]
-      }
+        name: "Val Guest",
+      },
+      additionalDirectors: [
+        {
+          name: "Ken Hughes"
+        },
+        {
+          name: "John Huston"
+        },
+        {
+          name: "Joseph McGrath"
+        },
+        {
+          name: "Robert Parrish"
+        },
+        {
+          name: "Richard Talmadge"
+        }
+      ]
     }
   ]
 }

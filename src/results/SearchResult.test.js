@@ -49,7 +49,7 @@ it('displays alternate titles', async () => {
   expect(screen.queryByText("Women's Penitentiary XII, Island of Despair, Isle of Lost Women, Prostitutes in Prison, The Hot Death")).not.toBeInTheDocument();
 });
 
-it('displays director aliases', async () => {
+it('displays additional directors', async () => {
   const params = {
     title: {
       name: "Ator, the Fighting Eagle",
@@ -58,13 +58,21 @@ it('displays director aliases', async () => {
     year: "1982",
     director: {
       name: "Joe D'Amato",
-      aliases: [
-        "David Hills",
-        "Michael Di Caprio",
-        "Raf de Palma",
-        "Alexandre Borsky"
-      ]
-    }
+    },
+    additionalDirectors: [
+      {
+        name: "David Hills"
+      },
+      {
+        name: "Michael Di Caprio"
+      },
+      {
+        name: "Raf de Palma"
+      },
+      {
+        name: "Alexandre Borsky"
+      }
+    ]
   }
   render(<SearchResult {...params} />);
   expect(screen.getByText("Ator, the Fighting Eagle")).toBeInTheDocument();
