@@ -3,6 +3,7 @@ import React from 'react';
 export default class SearchResult extends React.Component {
 
   render() {
+    var additionalTexts = {show: "show aliases", hide: "hide aliases"};
     return (
       <>
         <ExpandableResult 
@@ -13,6 +14,8 @@ export default class SearchResult extends React.Component {
         <div className="result-year">({this.props.year})</div>
         <ExpandableResult
           mainResult={this.props.director.name}
+          mainResultAdditional={this.props.director.aliases}
+          mainResultAdditionalTexts={additionalTexts}
           secondaryResults={this.props.additionalDirectors?.map((director) => director.name)}
          />
       </>
@@ -21,13 +24,28 @@ export default class SearchResult extends React.Component {
 }
 
 class ExpandableResult extends React.Component {
-  state = { expand: false };
+  state = { expand: false, expandAdditionalMain: false };
   render() {
     const className = this.props.isPrimary ? "result-primary" : "result-standard";
     const onClick = () => this.setState(prev => ({ expand: !prev.expand}));
+    const onAdditionalMainClick = () => this.setState(prev => ({ expandAdditionalMain: !prev.expandAdditionalMain}));
     return (
       <div>
         <span className={className}>{this.props.mainResult}</span>
+        {this.props.mainResultAdditional &&
+          <span className="expansion-toggle" onClick={onAdditionalMainClick}>
+            ({this.state.expandAdditionalMain ? this.props.mainResultAdditionalTexts.hide : this.props.mainResultAdditionalTexts.show})
+            </span>
+        }
+        {this.state.expandAdditionalMain &&
+          <span>
+            {
+              this.props.mainResultAdditional.map((additional, i) => [
+                i > 0 && ", ",
+                additional
+              ])}
+          </span>
+        }
         {this.props.secondaryResults &&
           <div className="expansion-toggle" onClick={onClick}>
             {this.state.expand ? "less" : "more"}

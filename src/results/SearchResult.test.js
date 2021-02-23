@@ -85,3 +85,32 @@ it('displays additional directors', async () => {
   fireEvent.click(screen.getByText("less"));
   expect(screen.queryByText("David Hills, Michael Di Caprio, Raf de Palma, Alexandre Borsky")).not.toBeInTheDocument();
 });
+
+it('displays alternate director names', async () => {
+  const params = {
+    title: {
+      name: "The Whip and the Body",
+      id: "185",
+    },
+    year: "1963",
+    director: {
+      name: "Mario Bava",
+      aliases: [
+        "John M. Old",
+        "John Old",
+        "John Hold",
+        "Mickey Lion"
+      ]
+    }
+  }
+  render(<SearchResult {...params} />);
+  expect(screen.getByText("The Whip and the Body")).toBeInTheDocument();
+  expect(screen.getByText("(1963)")).toBeInTheDocument;
+  expect(screen.getByText("Mario Bava")).toBeInTheDocument();
+
+  fireEvent.click(screen.getByText("(show aliases)"));
+  expect(screen.getByText("John M. Old, John Old, John Hold, Mickey Lion")).toBeInTheDocument();
+
+  fireEvent.click(screen.getByText("(hide aliases)"));
+  expect(screen.queryByText("John M. Old, John Old, John Hold, Mickey Lion")).not.toBeInTheDocument();
+});
