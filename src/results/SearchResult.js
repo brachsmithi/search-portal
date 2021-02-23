@@ -24,10 +24,10 @@ export default class SearchResult extends React.Component {
 }
 
 class ExpandableResult extends React.Component {
-  state = { expand: false, expandAdditionalMain: false };
+  state = { expandSecondaryResults: false, expandAdditionalMain: false };
   render() {
     const className = this.props.isPrimary ? "result-primary" : "result-standard";
-    const onClick = () => this.setState(prev => ({ expand: !prev.expand}));
+    const onSecondaryResultsClick = () => this.setState(prev => ({ expandSecondaryResults: !prev.expandSecondaryResults}));
     const onAdditionalMainClick = () => this.setState(prev => ({ expandAdditionalMain: !prev.expandAdditionalMain}));
     return (
       <div>
@@ -47,11 +47,11 @@ class ExpandableResult extends React.Component {
           </span>
         }
         {this.props.secondaryResults &&
-          <div className="expansion-toggle" onClick={onClick}>
-            {this.state.expand ? "less" : "more"}
+          <div className="expansion-toggle" onClick={onSecondaryResultsClick}>
+            {this.state.expandSecondaryResults ? "less" : "more"}
           </div>
         }
-        {this.state.expand &&
+        {this.state.expandSecondaryResults &&
           <div className="secondary-results">
             {this.props.secondaryResults.map((result, i) => [
               i > 0 && ", ",
