@@ -32,6 +32,10 @@ class ExpandableResult extends React.Component {
     const className = this.props.isPrimary ? "result-primary" : "result-standard";
     const onSecondaryResultsClick = () => this.setState(prev => ({ expandSecondaryResults: !prev.expandSecondaryResults}));
     const onAdditionalMainClick = () => this.setState(prev => ({ expandAdditionalMain: !prev.expandAdditionalMain}));
+    const delimitedJoin = (arr) => arr.map((entry, i) => [
+      i > 0 && ", ",
+      entry
+    ]);
     return (
       <div>
         <span className={className}>{this.props.mainResult}</span>
@@ -42,11 +46,7 @@ class ExpandableResult extends React.Component {
         }
         {this.state.expandAdditionalMain &&
           <span>
-            {
-              this.props.mainResultAdditional.map((additional, i) => [
-                i > 0 && ", ",
-                additional
-              ])}
+            {delimitedJoin(this.props.mainResultAdditional)}
           </span>
         }
         {this.props.secondaryResults &&
@@ -56,10 +56,7 @@ class ExpandableResult extends React.Component {
         }
         {this.state.expandSecondaryResults &&
           <div className="secondary-results">
-            {this.props.secondaryResults.map((result, i) => [
-              i > 0 && ", ",
-              result
-            ])}
+            {delimitedJoin(this.props.secondaryResults)}
           </div>
         }
       </div>
