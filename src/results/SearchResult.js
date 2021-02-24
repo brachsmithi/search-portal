@@ -5,7 +5,7 @@ export default class SearchResult extends React.Component {
   render() {
     var additionalNameTexts = {show: "show aliases", hide: "hide aliases"};
     var additionalDirectorTexts = {show: "more directors", hide: "fewer directors"};
-    var secondaryResultTexts = {show: "more", hide: "less"};
+    var secondaryResultTexts = {show: "more titles", hide: "fewer titles"};
     return (
       <>
         <ExpandableResult 

@@ -42,10 +42,10 @@ it('displays alternate titles', async () => {
   expect(screen.getByText("(1969)")).toBeInTheDocument;
   expect(screen.getByText("Jesùs Franco")).toBeInTheDocument();
 
-  fireEvent.click(screen.getByText("more"));
+  fireEvent.click(screen.getByText("more titles"));
   expect(screen.getByText("Women's Penitentiary XII, Island of Despair, Isle of Lost Women, Prostitutes in Prison, The Hot Death")).toBeInTheDocument();
 
-  fireEvent.click(screen.getByText("less"));
+  fireEvent.click(screen.getByText("fewer titles"));
   expect(screen.queryByText("Women's Penitentiary XII, Island of Despair, Isle of Lost Women, Prostitutes in Prison, The Hot Death")).not.toBeInTheDocument();
 });
 
