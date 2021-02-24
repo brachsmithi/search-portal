@@ -3,23 +3,24 @@ import React from 'react';
 export default class SearchResult extends React.Component {
 
   render() {
-    var additionalTexts = {show: "show aliases", hide: "hide aliases"};
-    var secondaryTexts = {show: "more", hide: "less"};
+    var additionalNameTexts = {show: "show aliases", hide: "hide aliases"};
+    var additionalDirectorTexts = {show: "more directors", hide: "fewer directors"};
+    var secondaryResultTexts = {show: "more", hide: "less"};
     return (
       <>
         <ExpandableResult 
           isPrimary={true}
           mainResult={this.props.title.name}
           secondaryResults={this.props.title.alternateTitles}
-          secondaryResultTexts={secondaryTexts}
+          secondaryResultTexts={secondaryResultTexts}
          />
         <div className="result-year">({this.props.year})</div>
         <ExpandableResult
           mainResult={this.props.director.name}
           mainResultAdditional={this.props.director.aliases}
-          mainResultAdditionalTexts={additionalTexts}
+          mainResultAdditionalTexts={additionalNameTexts}
           secondaryResults={this.props.additionalDirectors?.map((director) => director.name)}
-          secondaryResultTexts={secondaryTexts}
+          secondaryResultTexts={additionalDirectorTexts}
          />
       </>
     );

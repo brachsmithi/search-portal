@@ -79,10 +79,10 @@ it('displays additional directors', async () => {
   expect(screen.getByText("(1982)")).toBeInTheDocument;
   expect(screen.getByText("Joe D'Amato")).toBeInTheDocument();
 
-  fireEvent.click(screen.getByText("more"));
+  fireEvent.click(screen.getByText("more directors"));
   expect(screen.getByText("David Hills, Michael Di Caprio, Raf de Palma, Alexandre Borsky")).toBeInTheDocument();
 
-  fireEvent.click(screen.getByText("less"));
+  fireEvent.click(screen.getByText("fewer directors"));
   expect(screen.queryByText("David Hills, Michael Di Caprio, Raf de Palma, Alexandre Borsky")).not.toBeInTheDocument();
 });
 
