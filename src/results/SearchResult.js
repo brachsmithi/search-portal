@@ -41,13 +41,13 @@ class ExpandableResult extends React.Component {
         <span className={className}>{this.props.mainResult}</span>
         {this.props.mainResultAdditional &&
           <span className="expansion-toggle" onClick={onAdditionalMainClick}>
-            ({this.state.expandAdditionalMain ? this.props.mainResultAdditionalTexts.hide : this.props.mainResultAdditionalTexts.show})
-            </span>
+            &nbsp;({this.state.expandAdditionalMain ? this.props.mainResultAdditionalTexts.hide : this.props.mainResultAdditionalTexts.show})
+          </span>
         }
         {this.state.expandAdditionalMain &&
-          <span>
+          <div className="additional-main">
             {delimitedJoin(this.props.mainResultAdditional)}
-          </span>
+          </div>
         }
         {this.props.secondaryResults &&
           <div className="expansion-toggle" onClick={onSecondaryResultsClick}>

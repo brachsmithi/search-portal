@@ -114,3 +114,27 @@ MultipleDirectors.args = {
     }
   ]
 }
+
+export const DirectorAliases = Template.bind({});
+DirectorAliases.args = {
+  searchResults: [
+    {
+      title: {
+        id: "1",
+        name: "Mari-Cookie and the Killer Tarantula"
+      },
+      year: "1998",
+      director: {
+        name: "Jesus Franco",
+        aliases: [
+          "Jess Franco",
+          "Clifford Brown Jr.",
+          "James Lee Johnson",
+          "Lennie Hayden",
+          "Betty Carter",
+          "Lulu Laverne"
+        ]
+      }
+    }
+  ]
+}

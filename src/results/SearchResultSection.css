@@ -38,6 +38,11 @@
   font-size: small;
 }
 
+.additional-main {
+  font-weight: normal;
+  font-size: small;
+}
+
 .result-year {
   font-style: italic;
 }
