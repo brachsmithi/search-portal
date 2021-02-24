@@ -4,12 +4,14 @@ export default class SearchResult extends React.Component {
 
   render() {
     var additionalTexts = {show: "show aliases", hide: "hide aliases"};
+    var secondaryTexts = {show: "more", hide: "less"};
     return (
       <>
         <ExpandableResult 
           isPrimary={true}
           mainResult={this.props.title.name}
           secondaryResults={this.props.title.alternateTitles}
+          secondaryResultTexts={secondaryTexts}
          />
         <div className="result-year">({this.props.year})</div>
         <ExpandableResult
@@ -17,6 +19,7 @@ export default class SearchResult extends React.Component {
           mainResultAdditional={this.props.director.aliases}
           mainResultAdditionalTexts={additionalTexts}
           secondaryResults={this.props.additionalDirectors?.map((director) => director.name)}
+          secondaryResultTexts={secondaryTexts}
          />
       </>
     );
@@ -48,7 +51,7 @@ class ExpandableResult extends React.Component {
         }
         {this.props.secondaryResults &&
           <div className="expansion-toggle" onClick={onSecondaryResultsClick}>
-            {this.state.expandSecondaryResults ? "less" : "more"}
+            {this.state.expandSecondaryResults ? this.props.secondaryResultTexts.hide : this.props.secondaryResultTexts.show}
           </div>
         }
         {this.state.expandSecondaryResults &&
