@@ -17,8 +17,11 @@ exports.directorCreate = async (req, res) => {
     .insert({
       'name': req.body.name
     })
-    .then(() => {
-      res.json({ message: `Director \'${req.body.name}\' created.` })
+    .then((record) => {
+      res.json({ 
+        message: `Director \'${req.body.name}\' created.`,
+        id: record
+      })
     })
     .catch(err => {
       res.json({ message: `There was an error creating director ${req.body.name}: ${err}` })
@@ -26,7 +29,6 @@ exports.directorCreate = async (req, res) => {
 }
 
 exports.directorFind = async (req, res) => {
-  console.log(req)
   knex
     .select('*')
     .from('directors')
@@ -40,10 +42,35 @@ exports.directorFind = async (req, res) => {
 }
 
 exports.directorsClear = async (req, res) => {
-  console.log(req)
-  knex
+  const response1 = await knex
     .delete('*')
     .from('directors')
+    .then(data => {
+      return data
+    })
+    .catch(err => {
+      return `There was an error deleting directors: ${err}`
+    })
+  
+  const response2 = await knex
+    .delete('*')
+    .from('program_directors')
+    .then(data => {
+      return data
+    })
+    .catch(err => {
+      return `There was an error deleting program_directors: ${err}`
+    })
+
+  res.json({messages: [response1, response2]});
+}
+
+exports.programAdd = async (req, res) => {
+  knex('program_directors')
+    .insert({
+      director_id: req.body.director_id,
+      program_id: req.body.program_id
+    })
     .then(data => {
       res.json(data)
     })

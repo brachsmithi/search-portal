@@ -19,8 +19,11 @@ exports.programCreate = async (req, res) => {
       'year': req.body.year,
       'search_field': req.body.search_field
     })
-    .then(() => {
-      res.json({ message: `Program \'${req.body.title}\' from ${req.body.year} created.` })
+    .then((record) => {
+      res.json({ 
+        message: `Program \'${req.body.title}\' from ${req.body.year} created.`,
+        id: record
+      })
     })
     .catch(err => {
       res.json({ message: `There was an error creating program ${req.body.title}: ${err}` })
@@ -28,19 +31,24 @@ exports.programCreate = async (req, res) => {
 }
 
 exports.programFind = async (req, res) => {
-  console.log(req)
   knex
     .select('*')
     .from('programs')
+    .leftOuterJoin('program_directors', 'programs.id', 'program_directors.program_id')
+    .leftOuterJoin('directors', 'program_directors.director_id', 'directors.id')
     .where('search_field', 'like', `%${req.body.search_text}%`)
     .then(data => {
+      console.log(data)
       res.json(
         data.map((program) => {
           return {
             title: {
               name: program.title
             },
-            year: program.year
+            year: program.year,
+            director: {
+              name: program.name
+            }
           }
         })
       );
@@ -51,7 +59,6 @@ exports.programFind = async (req, res) => {
 }
 
 exports.programsClear = async (req, res) => {
-  console.log(req)
   knex
     .delete('*')
     .from('programs')

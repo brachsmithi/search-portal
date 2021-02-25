@@ -8,5 +8,6 @@ router.get('/all', directorsRoutes.directorsAll)
 router.post('/create', directorsRoutes.directorCreate)
 router.post('/find', directorsRoutes.directorFind)
 router.post('/deleteAll', directorsRoutes.directorsClear)
+router.post('/addprogram', directorsRoutes.programAdd)
 
 module.exports = router

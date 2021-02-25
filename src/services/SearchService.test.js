@@ -13,7 +13,7 @@ describe('SearchService', () => {
           return response.data;
         })
         .catch(error => console.error(error));
-    console.log(program);
+        
     const director = await axios.post("http://localhost:4001/directors/create", {
           name: "Edward L. Cahn"
         })
@@ -21,14 +21,25 @@ describe('SearchService', () => {
           return response.data;
         })
         .catch(error => console.error(error));
-    console.log(director);
+        
+    await axios.post("http://localhost:4001/directors/addprogram", {
+          director_id: director.id,
+          program_id: program.id
+        })
+        .then(response => {
+          return response.data;
+        })
+        .catch(error => console.error(error));
   });
 
   afterAll(async () => {
     await axios.post("http://localhost:4001/programs/deleteAll")
       .then(response => {
-        console.log("returned from delete");
-        console.log(response.data);
+        return response.data;
+      })
+      .catch(error => console.error(error));
+    await axios.post("http://localhost:4001/directors/deleteAll")
+      .then(response => {
         return response.data;
       })
       .catch(error => console.error(error));
@@ -46,9 +57,10 @@ describe('SearchService', () => {
     const progs = await service.findProgram("Beyond Space");
   
     expect(progs).toHaveLength(1);
-    console.log(progs);
-    expect(progs[0].title.name).toEqual("It! The Terror From Beyond Space");
-    expect(progs[0].year).toEqual("1958");
+    const program = progs[0];
+    expect(program.title.name).toEqual("It! The Terror From Beyond Space");
+    expect(program.year).toEqual("1958");
+    expect(program.director.name).toEqual("Edward L. Cahn")
   });
 
 })
