@@ -5,6 +5,7 @@ const cors = require('cors')
 const helmet = require('helmet')
 
 const programsRouter = require('./routes/programs-route')
+const directorsRouter = require('./routes/directors-route')
 
 const PORT = process.env.PORT || 4001
 
@@ -17,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.use('/programs', programsRouter)
+app.use('/directors', directorsRouter)
 
 app.use(function (err, req, res, next) {
   console.error(err.stack)

@@ -70,7 +70,6 @@ knex.schema
         console.error(`There was an error setting up the database: ${error}`)
       })
 
-
 knex.schema
   .hasTable('alternate_titles')
     .then((exists) => {
@@ -94,8 +93,6 @@ knex.schema
     .catch((error) => {
       console.error(`There was an error setting up the database: ${error}`)
     })
-
-
 
 knex.schema
 .hasTable('program_directors')
