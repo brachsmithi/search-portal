@@ -44,7 +44,7 @@ exports.programFind = async (req, res) => {
           }
         })
       );
-    })
+    })a
     .catch(err => {
       res.json({ message: `There was an error retrieving programs: ${err}` })
     })
