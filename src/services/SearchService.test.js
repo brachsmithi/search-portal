@@ -4,45 +4,31 @@ import SearchService from './SearchService'
 describe('SearchService', () => {
 
   beforeAll(async () => {
-    const program = await axios.post("http://localhost:4001/programs/create", {
-          title: "It! The Terror From Beyond Space",
-          year: "1958",
-          search_field: "It The Terror From Beyond Space"
-        })
-        .then(response => {
-          return response.data;
-        })
-        .catch(error => console.error(error));
+    const program1 = await postToDb('programs/create', {
+      title: 'It! The Terror From Beyond Space',
+      year: '1958',
+      search_field: 'It The Terror From Beyond Space'
+    });
+
+    const program2 = await postToDb('programs/create', {
+      title: 'Planet of the Vampires',
+      year: '1965',
+      search_field: 'Planet of the Vampires The Demon Planet'
+    });
         
-    const director = await axios.post("http://localhost:4001/directors/create", {
-          name: "Edward L. Cahn"
-        })
-        .then(response => {
-          return response.data;
-        })
-        .catch(error => console.error(error));
-        
-    await axios.post("http://localhost:4001/directors/addprogram", {
-          director_id: director.id,
-          program_id: program.id
-        })
-        .then(response => {
-          return response.data;
-        })
-        .catch(error => console.error(error));
+    const director1 = await postToDb('directors/create', {
+      name: 'Edward L. Cahn'
+    });
+
+    await postToDb('directors/addprogram', {
+      director_id: director1.id,
+      program_id: program1.id
+    });
   });
 
   afterAll(async () => {
-    await axios.post("http://localhost:4001/programs/deleteAll")
-      .then(response => {
-        return response.data;
-      })
-      .catch(error => console.error(error));
-    await axios.post("http://localhost:4001/directors/deleteAll")
-      .then(response => {
-        return response.data;
-      })
-      .catch(error => console.error(error));
+    await postToDb('programs/deleteAll');
+    await postToDb('directors/deleteAll');
   })
   
   it ('will test empty results', async () => {
@@ -62,5 +48,13 @@ describe('SearchService', () => {
     expect(program.year).toEqual("1958");
     expect(program.director.name).toEqual("Edward L. Cahn")
   });
+
+  async function postToDb(path, data) {
+    return await axios.post(`http://localhost:4001/${path}`, data)
+        .then(response => {
+          return response.data;
+        })
+        .catch(error => console.error(error));
+  };
 
 })
