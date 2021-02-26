@@ -132,6 +132,15 @@ describe('SearchService', () => {
     expect(program.director.aliases).toHaveLength(3)
   });
 
+  it ('finds multiple programs', async () => {
+    const service = new SearchService();
+    const progs = await service.findProgram('Space');
+
+    expect(progs).toHaveLength(2);
+    expect(progs[0].title.name).toEqual('It! The Terror From Beyond Space');
+    expect(progs[1].title.name).toEqual('Planet of the Vampires');
+  })
+
   async function postToDb(path, data) {
     return await axios.post(`http://localhost:4001/${path}`, data)
         .then(response => {
