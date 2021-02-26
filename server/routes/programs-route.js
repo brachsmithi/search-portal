@@ -8,5 +8,6 @@ router.get('/all', programsRoutes.programsAll)
 router.post('/create', programsRoutes.programCreate)
 router.post('/find', programsRoutes.programFind)
 router.post('/deleteAll', programsRoutes.programsClear)
+router.post('/addTitle', programsRoutes.programCreateAlternateTitle)
 
 module.exports = router
