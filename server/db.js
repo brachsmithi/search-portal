@@ -118,6 +118,29 @@ knex.schema
     console.error(`There was an error setting up the database: ${error}`)
   })
 
+  knex.schema
+  .hasTable('director_aliases')
+    .then((exists) => {
+      if (!exists) {
+        return knex.schema.createTable('director_aliases', (table)  => {
+          table.increments('id').primary()
+          table.integer('director_id')
+          table.string('alias')
+        })
+        .then(() => {
+          console.log('Table \'Director Aliases\' created')
+        })
+        .catch((error) => {
+          console.error(`There was an error creating table director_aliases: ${error}`)
+        })
+      }
+    })
+    .then(() => {
+      console.log('done')
+    })
+    .catch((error) => {
+      console.error(`There was an error setting up the database: ${error}`)
+    })
 // Just for debugging purposes:
 // Log all data in "books" table
 knex.select('*').from('programs')
@@ -136,5 +159,9 @@ knex.select('*').from('program_directors')
   .then(data => console.log('data:', data))
   .catch(err => console.log(err))
 
+knex.select('*').from('director_aliases')
+  .then(data => console.log('data:', data))
+  .catch(err => console.log(err))
+  
 // Export the database
 module.exports = knex

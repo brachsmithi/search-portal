@@ -69,6 +69,21 @@ describe('SearchService', () => {
       name: 'Mario Bava'
     });
 
+    await postToDb('directors/addalias', {
+      director_id: director2.id,
+      alias: 'John M. Old'
+    });
+
+    await postToDb('directors/addalias', {
+      director_id: director2.id,
+      alias: 'Mickey Lion'
+    });
+
+    await postToDb('directors/addalias', {
+      director_id: director2.id,
+      alias: 'John Hold'
+    });
+
     await postToDb('directors/addprogram', {
       director_id: director1.id,
       program_id: program1.id
@@ -103,16 +118,18 @@ describe('SearchService', () => {
     expect(program.director.name).toEqual("Edward L. Cahn")
   });
 
-  it ('finds program by alternate title', async () => {
+  it ('finds program with alternate titles and director aliases', async () => {
     const service = new SearchService();
     const progs = await service.findProgram("Demon");
   
     expect(progs).toHaveLength(1);
     const program = progs[0];
+
     expect(program.title.name).toEqual("Planet of the Vampires");
+    expect(program.title.alternateTitles).toHaveLength(9)
     expect(program.year).toEqual("1965");
     expect(program.director.name).toEqual("Mario Bava")
-    expect(program.title.alternateTitles).toHaveLength(9)
+    expect(program.director.aliases).toHaveLength(3)
   });
 
   async function postToDb(path, data) {

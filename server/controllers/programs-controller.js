@@ -62,7 +62,9 @@ exports.programFind = async (req, res) => {
           },
           year: program.year,
           director: {
-            name: program.name
+            id: program.director_id,
+            name: program.name,
+            aliases: []
           }
         }
       });
@@ -79,7 +81,19 @@ exports.programFind = async (req, res) => {
         programs[0].title.alternateTitles = data.map(at => at.title);
       })
       .catch(err => {
-        console.log(`There was an error retrieving programs: ${err}`)
+        console.log(`There was an error retrieving alternate titles: ${err}`);
+      });
+  }
+  if (programs[0]) {
+    await knex
+      .select('*')
+      .from('director_aliases')
+      .where('director_id', programs[0].director.id)
+      .then(data => {
+        programs[0].director.aliases = data.map(da => da.name);
+      })
+      .catch(err => {
+        console.log(`There was an error retrieving aliases: ${err}`);
       });
   }
   return res.json(programs);
