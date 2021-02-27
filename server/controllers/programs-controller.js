@@ -72,18 +72,18 @@ exports.programFind = async (req, res) => {
     .catch(err => {
       return `There was an error retrieving programs: ${err}`
     });
-  if (programs[0]) {
-    await knex 
+  programs.forEach(program => {
+    knex 
       .select('*')
       .from('alternate_titles')
-      .where('program_id', programs[0].id)
+      .where('program_id', program.id)
       .then(data => {
-        programs[0].title.alternateTitles = data.map(at => at.title);
+        program.title.alternateTitles = data.map(at => at.title);
       })
       .catch(err => {
         console.log(`There was an error retrieving alternate titles: ${err}`);
       });
-  }
+  });
   if (programs[0]) {
     await knex
       .select('*')

@@ -102,33 +102,33 @@ describe('SearchService', () => {
   
   it ('will test empty results', async () => {
     const service = new SearchService();
-    const progs = await service.findProgram("foo");
+    const progs = await service.findProgram('Forest Gump');
 
     expect(progs).toHaveLength(0);
   });
 
   it ('finds simple program', async () => {
     const service = new SearchService();
-    const progs = await service.findProgram("Beyond Space");
+    const progs = await service.findProgram('Beyond Space');
   
     expect(progs).toHaveLength(1);
     const program = progs[0];
-    expect(program.title.name).toEqual("It! The Terror From Beyond Space");
-    expect(program.year).toEqual("1958");
-    expect(program.director.name).toEqual("Edward L. Cahn")
+    expect(program.title.name).toEqual('It! The Terror From Beyond Space');
+    expect(program.year).toEqual('1958');
+    expect(program.director.name).toEqual('Edward L. Cahn')
   });
 
   it ('finds program with alternate titles and director aliases', async () => {
     const service = new SearchService();
-    const progs = await service.findProgram("Demon");
+    const progs = await service.findProgram('Demon');
   
     expect(progs).toHaveLength(1);
     const program = progs[0];
 
-    expect(program.title.name).toEqual("Planet of the Vampires");
+    expect(program.title.name).toEqual('Planet of the Vampires');
     expect(program.title.alternateTitles).toHaveLength(9)
-    expect(program.year).toEqual("1965");
-    expect(program.director.name).toEqual("Mario Bava")
+    expect(program.year).toEqual('1965');
+    expect(program.director.name).toEqual('Mario Bava')
     expect(program.director.aliases).toHaveLength(3)
   });
 
@@ -139,6 +139,7 @@ describe('SearchService', () => {
     expect(progs).toHaveLength(2);
     expect(progs[0].title.name).toEqual('It! The Terror From Beyond Space');
     expect(progs[1].title.name).toEqual('Planet of the Vampires');
+    expect(progs[1].title.alternateTitles).toHaveLength(9)
   })
 
   async function postToDb(path, data) {
