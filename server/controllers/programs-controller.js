@@ -61,11 +61,13 @@ exports.programFind = async (req, res) => {
             alternateTitles: []
           },
           year: program.year,
-          director: {
-            id: program.director_id,
-            name: program.name,
-            aliases: []
-          }
+          director: [
+            {
+              id: program.director_id,
+              name: program.name,
+              aliases: []
+            }
+          ]
         }
       });
     })
@@ -88,9 +90,9 @@ exports.programFind = async (req, res) => {
     await knex
       .select('*')
       .from('director_aliases')
-      .where('director_id', programs[0].director.id)
+      .where('director_id', programs[0].director[0].id)
       .then(data => {
-        programs[0].director.aliases = data.map(da => da.name);
+        programs[0].director[0].aliases = data.map(da => da.name);
       })
       .catch(err => {
         console.log(`There was an error retrieving aliases: ${err}`);

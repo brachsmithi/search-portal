@@ -115,7 +115,7 @@ describe('SearchService', () => {
     const program = progs[0];
     expect(program.title.name).toEqual('It! The Terror From Beyond Space');
     expect(program.year).toEqual('1958');
-    expect(program.director.name).toEqual('Edward L. Cahn')
+    expect(program.director[0].name).toEqual('Edward L. Cahn')
   });
 
   it ('finds program with alternate titles and director aliases', async () => {
@@ -128,8 +128,8 @@ describe('SearchService', () => {
     expect(program.title.name).toEqual('Planet of the Vampires');
     expect(program.title.alternateTitles).toHaveLength(9)
     expect(program.year).toEqual('1965');
-    expect(program.director.name).toEqual('Mario Bava')
-    expect(program.director.aliases).toHaveLength(3)
+    expect(program.director[0].name).toEqual('Mario Bava')
+    expect(program.director[0].aliases).toHaveLength(3)
   });
 
   it ('finds multiple programs', async () => {
