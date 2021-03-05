@@ -10,7 +10,7 @@ class SearchService {
     const programs = [];
     for(var i = 0; i < data.program.length; i++) {
       const program = data.program[i];
-      if (program.search_field.includes(searchText)) {
+      if (program.search_field.toLowerCase().includes(searchText.toLowerCase())) {
         programs.push(program)
       }
     }

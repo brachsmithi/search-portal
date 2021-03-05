@@ -99,4 +99,15 @@ describe('SearchService', () => {
     expect(progs[1].title[0]).toEqual('Planet of the Vampires');
   })
 
+  it ('ignores case', async () => {
+    const service = new SearchService();
+    const progs = await service.findProgram('haunt');
+  
+    expect(progs).toHaveLength(1);
+    const program = progs[0];
+
+    expect(program.title).toHaveLength(10)
+    expect(program.title[0]).toEqual('Planet of the Vampires');
+  })
+
 })
