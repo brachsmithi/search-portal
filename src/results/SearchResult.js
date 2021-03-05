@@ -10,16 +10,16 @@ export default class SearchResult extends React.Component {
       <>
         <ExpandableResult 
           isPrimary={true}
-          mainResult={this.props.title.name}
-          secondaryResults={this.props.title.alternateTitles}
+          mainResult={this.props.title[0]}
+          secondaryResults={this.props.title.slice(1,this.props.title.length)}
           secondaryResultTexts={secondaryResultTexts}
          />
         <div className="result-year">({this.props.year})</div>
         <ExpandableResult
-          mainResult={this.props.director.name}
-          mainResultAdditional={this.props.director.aliases}
+          mainResult={this.props.director[0].name}
+          mainResultAdditional={this.props.director[0].alias}
           mainResultAdditionalTexts={additionalNameTexts}
-          secondaryResults={this.props.additionalDirectors?.map((director) => director.name)}
+          secondaryResults={this.props.director.slice(1, this.props.director.length)?.map((director) => director.name)}
           secondaryResultTexts={additionalDirectorTexts}
          />
       </>

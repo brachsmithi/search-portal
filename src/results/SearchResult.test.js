@@ -4,14 +4,13 @@ import SearchResult from './SearchResult';
 
 it('displays given result', () => {
   const params = { 
-    title: {
-      name: "The Lost World",
-      id: "53"
-    },
+    title: ["The Lost World"],
     year: "1925",
-    director: {
-      name: "Harry O. Hoyt"
-    }
+    director: [
+      {
+        name: "Harry O. Hoyt"
+      }
+    ]
   };
   render(<SearchResult {...params} />);
   expect(screen.getByText("The Lost World")).toBeInTheDocument();
@@ -21,21 +20,20 @@ it('displays given result', () => {
 
 it('displays alternate titles', async () => {
   const params = {
-    title: {
-      name: "99 Women",
-      id: "242",
-      alternateTitles: [
-        "Women's Penitentiary XII",
-        "Island of Despair",
-        "Isle of Lost Women",
-        "Prostitutes in Prison",
-        "The Hot Death"
-      ]
-    },
+    title: [
+      "99 Women",
+      "Women's Penitentiary XII",
+      "Island of Despair",
+      "Isle of Lost Women",
+      "Prostitutes in Prison",
+      "The Hot Death"
+    ],
     year: "1969",
-    director: {
-      name: "Jesùs Franco"
-    }
+    director: [
+      {
+        name: "Jesùs Franco"
+      }
+    ]
   }
   render(<SearchResult {...params} />);
   expect(screen.getByText("99 Women")).toBeInTheDocument();
@@ -51,15 +49,12 @@ it('displays alternate titles', async () => {
 
 it('displays additional directors', async () => {
   const params = {
-    title: {
-      name: "Ator, the Fighting Eagle",
-      id: "98",
-    },
+    title: ["Ator, the Fighting Eagle"],
     year: "1982",
-    director: {
-      name: "Joe D'Amato",
-    },
-    additionalDirectors: [
+    director: [
+      {
+        name: "Joe D'Amato",
+      },
       {
         name: "David Hills"
       },
@@ -88,20 +83,19 @@ it('displays additional directors', async () => {
 
 it('displays alternate director names', async () => {
   const params = {
-    title: {
-      name: "The Whip and the Body",
-      id: "185",
-    },
+    title: ["The Whip and the Body"],
     year: "1963",
-    director: {
-      name: "Mario Bava",
-      aliases: [
-        "John M. Old",
-        "John Old",
-        "John Hold",
-        "Mickey Lion"
-      ]
-    }
+    director: [
+      {
+        name: "Mario Bava",
+        alias: [
+          "John M. Old",
+          "John Old",
+          "John Hold",
+          "Mickey Lion"
+        ]
+      }
+    ]
   }
   render(<SearchResult {...params} />);
   expect(screen.getByText("The Whip and the Body")).toBeInTheDocument();

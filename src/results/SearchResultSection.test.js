@@ -26,24 +26,22 @@ it('displays multiple results', () => {
     searchTerm: "clue",
     searchResults: [
       {
-        title: {
-          name: "Clue",
-          id: "232"
-        },
+        title: ["Clue"],
         year: "1985",
-        director: {
-          name: "Jonathan Lynn"
-        }
+        director: [
+          {
+            name: "Jonathan Lynn"
+          }
+        ]
       },
       {
-        title: {
-          name: "Without a Clue",
-          id: "43"
-        },
+        title: ["Without a Clue"],
         year: "1988",
-        director: {
-          name: "Thom Eberhardt"
-        }
+        director: [
+          {
+            name: "Thom Eberhardt"
+          }
+        ]
       }
     ]
   };
