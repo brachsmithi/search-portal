@@ -1,22 +1,21 @@
-import axios from 'axios'
-import { response } from 'express';
+import { json } from "express";
 
 class SearchService {
 
-  async loadAllPrograms() {
-    return axios.get("http://localhost:4001/programs/all")
-      .then(response => {
-        return response.data;
-      })
-      .catch(error => console.error(`whoops`));
-  }
-
   async findProgram(searchText) {
-    return axios.post("http://localhost:4001/programs/find", {search_text: searchText})
-      .then(response => {
-        return response.data;
-      })
-      .catch(error => console.error('whoops'));
+    const source = await fetch('programs.json');
+    const jsonData = await source.json();
+    const data = JSON.parse(jsonData)
+
+    const programs = [];
+    for(var i = 0; i < data.program.length; i++) {
+      const program = data.program[i];
+      if (program.search_field.includes(searchText)) {
+        programs.push(program)
+      }
+    }
+
+    return programs;
   }
 }
 

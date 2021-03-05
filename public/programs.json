@@ -1,0 +1,43 @@
+{
+  "program":
+  [
+    {
+      "title": [
+        "It! The Terror From Beyond Space"
+      ],
+      "year": "1958",
+      "director": [
+        {
+          "name": "Edward L. Cahn"
+        }
+      ],
+      "search_field": "It The Terror From Beyond Space"
+    },
+    {
+      "title": [
+        "Planet of the Vampires",
+        "The Demon Planet",
+        "Planet of Blood",
+        "Space Mutants",
+        "Terror in Space",
+        "The Haunted Planet",
+        "The Haunted World",
+        "The Outlawed Planet",
+        "The Planet of Terror",
+        "The Planet of the Damned"
+      ],
+      "year": "1965",
+      "director": [
+        {
+          "name": "Mario Bava",
+          "alias": [
+            "John M. Old",
+            "Mickey Lion",
+            "John Hold"
+          ]
+        }
+      ],
+      "search_field": "Planet of the Vampires The Demon Planet Planet of Blood Space Mutants Terror in Space The Haunted Planet The Haunted World The Outlawed Planet The Planet of Terror The Planet of the Damned"
+    }
+  ]    
+}

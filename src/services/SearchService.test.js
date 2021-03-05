@@ -1,104 +1,61 @@
-import axios from 'axios'
 import SearchService from './SearchService'
 
 describe('SearchService', () => {
 
-  beforeAll(async () => {
-    const program1 = await postToDb('programs/create', {
-      title: 'It! The Terror From Beyond Space',
-      year: '1958',
-      search_field: 'It The Terror From Beyond Space'
-    });
+  const mockResponse = JSON.stringify(
+    {
+      program: [
+        {
+          title: [
+            "It! The Terror From Beyond Space"
+          ],
+          year: "1958",
+          director: [
+            {
+              name: "Edward L. Cahn"
+            }
+          ],
+          search_field: "It The Terror From Beyond Space"
+        },
+        {
+          title: [
+            "Planet of the Vampires",
+            "The Demon Planet",
+            "Planet of Blood",
+            "Space Mutants",
+            "Terror in Space",
+            "The Haunted Planet",
+            "The Haunted World",
+            "The Outlawed Planet",
+            "The Planet of Terror",
+            "The Planet of the Damned"
+          ],
+          year: "1965",
+          director: [
+            {
+              name: "Mario Bava",
+              alias: [
+                "John M. Old",
+                "Mickey Lion",
+                "John Hold"
+              ]
+            }
+          ],
+          search_field: "Planet of the Vampires The Demon Planet Planet of Blood Space Mutants Terror in Space The Haunted Planet The Haunted World The Outlawed Planet The Planet of Terror The Planet of the Damned"
+        }
+      ]  
+    }  
+  );
 
-    const program2 = await postToDb('programs/create', {
-      title: 'Planet of the Vampires',
-      year: '1965',
-      search_field: 'Planet of the Vampires The Demon Planet Planet of Blood Space Mutants Terror in Space The Haunted Planet The Haunted World The Outlawed Planet The Planet of Terror The Planet of the Damned'
-    });
-
-    await postToDb('programs/addtitle', {
-      id: program2.id,
-      title: 'The Demon Planet'
-    });
-
-    await postToDb('programs/addtitle', {
-      id: program2.id,
-      title: 'Planet of Blood'
-    });
-
-    await postToDb('programs/addtitle', {
-      id: program2.id,
-      title: 'Space Mutants'
-    });
-
-    await postToDb('programs/addtitle', {
-      id: program2.id,
-      title: 'Terror in Space'
-    });
-
-    await postToDb('programs/addtitle', {
-      id: program2.id,
-      title: 'The Haunted Planet'
-    });
-
-    await postToDb('programs/addtitle', {
-      id: program2.id,
-      title: 'The Haunted World'
-    });
-
-    await postToDb('programs/addtitle', {
-      id: program2.id,
-      title: 'The Outlawed Planet'
-    });
-
-    await postToDb('programs/addtitle', {
-      id: program2.id,
-      title: 'The Planet of Terror'
-    });
-
-    await postToDb('programs/addtitle', {
-      id: program2.id,
-      title: 'The Planet of the Damned'
-    });
-        
-    const director1 = await postToDb('directors/create', {
-      name: 'Edward L. Cahn'
-    });
-        
-    const director2 = await postToDb('directors/create', {
-      name: 'Mario Bava'
-    });
-
-    await postToDb('directors/addalias', {
-      director_id: director2.id,
-      alias: 'John M. Old'
-    });
-
-    await postToDb('directors/addalias', {
-      director_id: director2.id,
-      alias: 'Mickey Lion'
-    });
-
-    await postToDb('directors/addalias', {
-      director_id: director2.id,
-      alias: 'John Hold'
-    });
-
-    await postToDb('directors/addprogram', {
-      director_id: director1.id,
-      program_id: program1.id
-    });
-
-    await postToDb('directors/addprogram', {
-      director_id: director2.id,
-      program_id: program2.id
-    });
+  beforeEach(() => {
+    jest.spyOn(global, 'fetch').mockResolvedValue({
+      json: jest.fn().mockResolvedValue(mockResponse)
+    })
   });
-
-  afterAll(async () => {
-    await postToDb('programs/deleteAll');
-    await postToDb('directors/deleteAll');
-  })
+  
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
   
   it ('will test empty results', async () => {
     const service = new SearchService();
@@ -113,7 +70,7 @@ describe('SearchService', () => {
   
     expect(progs).toHaveLength(1);
     const program = progs[0];
-    expect(program.title.name).toEqual('It! The Terror From Beyond Space');
+    expect(program.title[0]).toEqual('It! The Terror From Beyond Space');
     expect(program.year).toEqual('1958');
     expect(program.director[0].name).toEqual('Edward L. Cahn')
   });
@@ -125,11 +82,11 @@ describe('SearchService', () => {
     expect(progs).toHaveLength(1);
     const program = progs[0];
 
-    expect(program.title.name).toEqual('Planet of the Vampires');
-    expect(program.title.alternateTitles).toHaveLength(9)
+    expect(program.title).toHaveLength(10)
+    expect(program.title[0]).toEqual('Planet of the Vampires');
     expect(program.year).toEqual('1965');
     expect(program.director[0].name).toEqual('Mario Bava')
-    expect(program.director[0].aliases).toHaveLength(3)
+    expect(program.director[0].alias).toHaveLength(3)
   });
 
   it ('finds multiple programs', async () => {
@@ -137,17 +94,9 @@ describe('SearchService', () => {
     const progs = await service.findProgram('Space');
 
     expect(progs).toHaveLength(2);
-    expect(progs[0].title.name).toEqual('It! The Terror From Beyond Space');
-    expect(progs[1].title.name).toEqual('Planet of the Vampires');
-    expect(progs[1].title.alternateTitles).toHaveLength(9)
+    expect(progs[0].title[0]).toEqual('It! The Terror From Beyond Space');
+    expect(progs[1].title).toHaveLength(10)
+    expect(progs[1].title[0]).toEqual('Planet of the Vampires');
   })
-
-  async function postToDb(path, data) {
-    return await axios.post(`http://localhost:4001/${path}`, data)
-        .then(response => {
-          return response.data;
-        })
-        .catch(error => console.error(error));
-  };
 
 })
