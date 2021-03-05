@@ -26,34 +26,35 @@ export const MultipleResults = Template.bind({});
 MultipleResults.args = {
   searchResults: [
     {
-      title: {
-        id: "1",
-        name: "Devil"
-      },
+      title: ["Devil"],
       year: "2010",
-      director: {
-        name: "John Erick Dowdle"
-      }
+      director: [
+        {
+          name: "John Erick Dowdle"
+        }
+      ]
     },
     {
-      title: {
-        id: "2",
-        name: "Terror Train" // aka Devil's Railcar
-      },
+      title: [
+        "Terror Train" // aka Devil's Railcar
+      ],
       year: "1980",
-      director: {
-        name: "Roger Spottiswoode"
-      }
+      director: [
+        {
+          name: "Roger Spottiswoode"
+        }
+      ]
     },
     {
-      title: {
-        id: "3",
-        name: "The Devils"
-      },
+      title: [
+        "The Devils"
+      ],
       year: "1971",
-      director: {
-        name: "Ken Russell"
-      }
+      director: [
+        {
+          name: "Ken Russell"
+        }
+      ]
     }
   ],
   searchTerm: "devil"
@@ -63,20 +64,19 @@ export const AlternateTitles = Template.bind({});
 AlternateTitles.args = {
   searchResults: [
     {
-      title: {
-        id: "1",
-        name: "The Awful Dr. Orlof",
-        alternateTitles: [
-          "The Demon Doctor",
-          "Cries in the Night",
-          "Screams in the Night",
-          "The Diabolical Dr. Satan"
-        ]
-      },
+      title: [
+        "The Awful Dr. Orlof",
+        "The Demon Doctor",
+        "Cries in the Night",
+        "Screams in the Night",
+        "The Diabolical Dr. Satan"
+      ],
       year: "1962",
-      director: {
-        name: "Jesùs Franco"
-      }
+      director: [
+        {
+          name: "Jesùs Franco"
+        }
+      ]
     },
   ],
   searchTerm: "demon"
@@ -86,15 +86,12 @@ export const MultipleDirectors = Template.bind({});
 MultipleDirectors.args = {
   searchResults: [
     {
-      title: {
-        id: "1",
-        name: "Casino Royale"
-      },
+      title: ["Casino Royale"],
       year: "1967",
-      director: {
-        name: "Val Guest",
-      },
-      additionalDirectors: [
+      director: [
+        {
+          name: "Val Guest",
+        },
         {
           name: "Ken Hughes"
         },
@@ -119,22 +116,21 @@ export const DirectorAliases = Template.bind({});
 DirectorAliases.args = {
   searchResults: [
     {
-      title: {
-        id: "1",
-        name: "Mari-Cookie and the Killer Tarantula"
-      },
+      title: ["Mari-Cookie and the Killer Tarantula"],
       year: "1998",
-      director: {
-        name: "Jesus Franco",
-        aliases: [
-          "Jess Franco",
-          "Clifford Brown Jr.",
-          "James Lee Johnson",
-          "Lennie Hayden",
-          "Betty Carter",
-          "Lulu Laverne"
-        ]
-      }
+      director: [
+        {
+          name: "Jesus Franco",
+          alias: [
+            "Jess Franco",
+            "Clifford Brown Jr.",
+            "James Lee Johnson",
+            "Lennie Hayden",
+            "Betty Carter",
+            "Lulu Laverne"
+          ]
+        }
+      ]
     }
   ]
 }
