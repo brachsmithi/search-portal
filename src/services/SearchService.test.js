@@ -2,50 +2,49 @@ import SearchService from './SearchService'
 
 describe('SearchService', () => {
 
-  const mockResponse = JSON.stringify(
-    {
-      program: [
-        {
-          title: [
-            "It! The Terror From Beyond Space"
-          ],
-          year: "1958",
-          director: [
-            {
-              name: "Edward L. Cahn"
-            }
-          ],
-          search_field: "It The Terror From Beyond Space"
-        },
-        {
-          title: [
-            "Planet of the Vampires",
-            "The Demon Planet",
-            "Planet of Blood",
-            "Space Mutants",
-            "Terror in Space",
-            "The Haunted Planet",
-            "The Haunted World",
-            "The Outlawed Planet",
-            "The Planet of Terror",
-            "The Planet of the Damned"
-          ],
-          year: "1965",
-          director: [
-            {
-              name: "Mario Bava",
-              alias: [
-                "John M. Old",
-                "Mickey Lion",
-                "John Hold"
-              ]
-            }
-          ],
-          search_field: "Planet of the Vampires The Demon Planet Planet of Blood Space Mutants Terror in Space The Haunted Planet The Haunted World The Outlawed Planet The Planet of Terror The Planet of the Damned"
-        }
-      ]  
-    }  
-  );
+  const mockResponse = 
+  {
+    "program": [
+      {
+        "title": [
+          "It! The Terror From Beyond Space"
+        ],
+        "year": "1958",
+        "director": [
+          {
+            "name": "Edward L. Cahn"
+          }
+        ],
+        "search_field": "It The Terror From Beyond Space"
+      },
+      {
+        "title": [
+          "Planet of the Vampires",
+          "The Demon Planet",
+          "Planet of Blood",
+          "Space Mutants",
+          "Terror in Space",
+          "The Haunted Planet",
+          "The Haunted World",
+          "The Outlawed Planet",
+          "The Planet of Terror",
+          "The Planet of the Damned"
+        ],
+        "year": "1965",
+        "director": [
+          {
+            "name": "Mario Bava",
+            "alias": [
+              "John M. Old",
+              "Mickey Lion",
+              "John Hold"
+            ]
+          }
+        ],
+        "search_field": "Planet of the Vampires The Demon Planet Planet of Blood Space Mutants Terror in Space The Haunted Planet The Haunted World The Outlawed Planet The Planet of Terror The Planet of the Damned"
+      }
+    ]  
+  };
 
   beforeEach(() => {
     jest.spyOn(global, 'fetch').mockResolvedValue({
@@ -108,6 +107,13 @@ describe('SearchService', () => {
 
     expect(program.title).toHaveLength(10)
     expect(program.title[0]).toEqual('Planet of the Vampires');
+  })
+
+  it ('returns empty results for undefined search', async () => {
+    const service = new SearchService();
+    const progs = await service.findProgram(undefined);
+  
+    expect(progs).toHaveLength(0);
   })
 
 })
