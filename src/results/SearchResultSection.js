@@ -1,3 +1,4 @@
+import './SearchResultSection.css';
 import React from 'react';
 import SearchResult from './SearchResult';
 
