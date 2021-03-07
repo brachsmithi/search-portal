@@ -4,7 +4,9 @@ import SearchResult from './SearchResult';
 
 it('displays given result', () => {
   const params = { 
-    title: ["The Lost World"],
+    title: [
+      "The Lost World"
+    ],
     year: "1925",
     director: [
       {
@@ -14,8 +16,12 @@ it('displays given result', () => {
   };
   render(<SearchResult {...params} />);
   expect(screen.getByText("The Lost World")).toBeInTheDocument();
+  expect(screen.queryByText('more titles')).not.toBeInTheDocument();
+  expect(screen.queryByText('0')).not.toBeInTheDocument();
   expect(screen.getByText("(1925)")).toBeInTheDocument();
   expect(screen.getByText("Harry O. Hoyt")).toBeInTheDocument();
+  expect(screen.queryByText('more directors')).not.toBeInTheDocument();
+  expect(screen.queryByText('0')).not.toBeInTheDocument();
 });
 
 it('displays alternate titles', async () => {
