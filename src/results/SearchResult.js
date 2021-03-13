@@ -16,8 +16,8 @@ export default class SearchResult extends React.Component {
          />
         <div className="result-year">({this.props.year})</div>
         <ExpandableResult
-          mainResult={this.props.director[0].name}
-          mainResultAdditional={this.props.director[0].alias}
+          mainResult={this.props.director[0]?.name}
+          mainResultAdditional={this.props.director[0]?.alias}
           mainResultAdditionalTexts={additionalNameTexts}
           secondaryResults={this.props.director.slice(1, this.props.director.length)?.map((director) => director.name)}
           secondaryResultTexts={additionalDirectorTexts}

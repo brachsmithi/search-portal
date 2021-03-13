@@ -114,3 +114,14 @@ it('displays alternate director names', async () => {
   fireEvent.click(screen.getByText("(hide aliases)"));
   expect(screen.queryByText("John M. Old, John Old, John Hold, Mickey Lion")).not.toBeInTheDocument();
 });
+
+it('displays when there are no directors', async () => {
+  const params = {
+    title: ["Body Care and Grooming"],
+    year: "1946",
+    director: []
+  }
+  render(<SearchResult {...params} />);
+  expect(screen.getByText("Body Care and Grooming")).toBeInTheDocument();
+  expect(screen.getByText("(1946)")).toBeInTheDocument;
+});
