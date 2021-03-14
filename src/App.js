@@ -1,4 +1,5 @@
 import './App.css';
+import configData from "./config.json";
 import SearchForm from './form/SearchForm';
 import SearchField from './form/SearchField';
 import SearchButton from './form/SearchButton';
@@ -24,6 +25,9 @@ function App() {
         <SearchButton />
       </SearchForm>
       <SearchResultSection searchResults={searchResults} />
+      <div className="footer">
+        {configData.VERSION}
+      </div>
     </div>
   );
 }

@@ -45,8 +45,9 @@ describe('App', () => {
     render(<App />);
     const header = screen.getByText(/Program Search Portal/i);
     expect(header).toBeInTheDocument();
-    expect(screen.getByPlaceholderText("Title Search")).toBeInTheDocument();
-    expect(screen.getByText("Search results will appear here")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Title Search')).toBeInTheDocument();
+    expect(screen.getByText('Search results will appear here')).toBeInTheDocument();
+    expect(screen.getByText('v1.0.0-a.1')).toBeInTheDocument();
   });
 
   test('displays search results', async () => {
