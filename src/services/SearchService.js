@@ -1,7 +1,9 @@
+import configData from "./../config.json";
+
 class SearchService {
 
   async findProgram(searchText) {
-    const source = await fetch('programs.json');
+    const source = await fetch(configData.PROGRAM_JSON);
     const jsonData = await source.json();
 
     const programs = [];
