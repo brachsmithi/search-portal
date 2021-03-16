@@ -6,6 +6,7 @@ import SearchButton from './form/SearchButton';
 import SearchResultSection from './results/SearchResultSection';
 import { useState } from 'react';
 import SearchService from './services/SearchService';
+require('dotenv').config();
 
 function App() {
   const [searchResults, setSearchResults] = useState({})

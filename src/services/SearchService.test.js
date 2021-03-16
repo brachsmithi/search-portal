@@ -1,6 +1,9 @@
 import SearchService from './SearchService'
+import configData from "./../config.json"
 
 describe('SearchService', () => {
+
+  const originalSource = configData.DATA_SOURCE;
 
   const mockResponse = 
   {
@@ -50,10 +53,12 @@ describe('SearchService', () => {
     jest.spyOn(global, 'fetch').mockResolvedValue({
       json: jest.fn().mockResolvedValue(mockResponse)
     })
+    configData.DATA_SOURCE = "LOCAL";
   });
   
   afterEach(() => {
     jest.restoreAllMocks();
+    configData.DATA_SOURCE = originalSource;
   });
   
   it ('will test empty results', async () => {

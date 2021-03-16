@@ -1,8 +1,11 @@
 import React from 'react'
 import { screen, render, fireEvent, act } from '@testing-library/react'
 import App from './App';
+import configData from "./config.json"
 
 describe('App', () => {
+  const originalSource = configData.DATA_SOURCE;
+
   beforeEach(() => {
     const mockResponse = {
       "program": [
@@ -34,11 +37,13 @@ describe('App', () => {
   beforeEach(() => {
     container = document.createElement('div');
     document.body.appendChild(container);
+    configData.DATA_SOURCE = "LOCAL";
   });
   
   afterEach(() => {
     document.body.removeChild(container);
     container = null;
+    configData.DATA_SOURCE = originalSource;
   });
 
   test('renders screen', () => {
@@ -47,7 +52,7 @@ describe('App', () => {
     expect(header).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Title Search')).toBeInTheDocument();
     expect(screen.getByText('Search results will appear here')).toBeInTheDocument();
-    expect(screen.getByText('v1.0.0-a.1')).toBeInTheDocument();
+    expect(screen.getByText(configData.VERSION)).toBeInTheDocument();
   });
 
   test('displays search results', async () => {
