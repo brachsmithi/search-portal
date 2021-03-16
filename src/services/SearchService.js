@@ -16,7 +16,7 @@ class SearchService {
   }
 
   async lookUpProgramJson() {
-    if (configData.DATA_SOURCE === 'AWS') {
+    if (process.env.REACT_APP_DATA_SOURCE === 'AWS') {
       return await this.lookUpProgramJsonFromAws();
     } else {
       return await this.lookUpProgramJsonFromPublicFolder();

@@ -1,5 +1,4 @@
 {
   "VERSION": "v1.0.0-a.3",
-  "DATA_SOURCE": "AWS",
   "PROGRAM_JSON": "programs.json"
 }
